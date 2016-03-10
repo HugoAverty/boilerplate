@@ -31,6 +31,8 @@
               else
                 img(src='#{user.gravatar(60)}')
               | #{user.profile.name || user.email || user.id}&nbsp;
+          li(class=(title=='Dashboard') ? 'active' : undefined)
+            a(href='/dashboard') Dashboard
           li
             a(href='/account') My Account
           li

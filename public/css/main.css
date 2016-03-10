@@ -8826,4 +8826,18 @@ textarea {
 .fa {
   margin-right: 6px; }
 
+#connections {
+  text-align: center; }
+  #connections p {
+    font-size: 96px;
+    line-height: 96px;
+    color: #ff6600;
+    text-shadow: 1px 1px 1px #222; }
+
+#visits thead tr td {
+  font-weight: bold; }
+
+#pageViews thead tr td {
+  font-weight: bold; }
+
 /*# sourceMappingURL=main.css.map */

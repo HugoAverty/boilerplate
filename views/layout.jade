@@ -20,7 +20,16 @@ html
     script(src='/js/lib/jquery-2.2.0.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/main.js')
-
+    script(src='/socket.io/socket.io.js?v=#{cacheBuster}')
+        //- For real-time monitoring
+        script.
+            var socket = io.connect();
+            socket.on('connect', function () {
+                socket.send(window.location.href);
+            });
+            window.onhashchange = function () {
+                socket.send(window.location.href);
+            }
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

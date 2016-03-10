@@ -66,8 +66,10 @@
   "devDependencies": {
     "blessed": "^0.1.81",
     "chai": "^3.5.0",
+    "connect-mongo": "^1.1.0",
     "mocha": "^2.4.5",
     "multiline": "^1.0.2",
+    "socket.io": "^1.4.5",
     "supertest": "^1.2.0"
   },
   "license": "MIT"
