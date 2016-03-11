@@ -1,25 +1,24 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
-    cookieParser = require('cookie-parser'),
-    compress = require('compression'),
-    session = require('express-session'),
-    bodyParser = require('body-parser'),
-    logger = require('morgan'),
-    errorHandler = require('errorhandler'),
-    lusca = require('lusca'),
-    methodOverride = require('method-override'),
-    dotenv = require('dotenv'),
-    MongoStore = require('connect-mongo/es5')(session),
-    flash = require('express-flash'),
+var express = require('express'), // Node.js web framework.
+    cookieParser = require('cookie-parser'), // Express 4 middleware.
+    compress = require('compression'), // Express 4 middleware.
+    session = require('express-session'), // Express 4 middleware.
+    bodyParser = require('body-parser'), // Express 4 middleware.
+    logger = require('morgan'), // Express 4 middleware.
+    errorHandler = require('errorhandler'), // Express 4 middleware.
+    lusca = require('lusca'), // CSRF middleware.
+    methodOverride = require('method-override'), // Express 4 middleware.
+    dotenv = require('dotenv'), // 	Loads environment variables from .env file.
+    MongoStore = require('connect-mongo/es5')(session), // MongoDB session store for Express.
+    flash = require('express-flash'), // Provides flash messages for Express.
     path = require('path'),
-    mongoose = require('mongoose'),
-    passport = require('passport'),
-    expressValidator = require('express-validator'),
+    mongoose = require('mongoose'), // MongoDB ODM.
+    passport = require('passport'), // 	Simple and elegant authentication library for node.js
+    expressValidator = require('express-validator'), // Easy form validation for Express.
     http = require('http'),
     io = require('socket.io'),
-
     sass = require('node-sass-middleware'),
     multer = require('multer'),
     storage = multer.diskStorage({

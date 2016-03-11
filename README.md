@@ -488,63 +488,6 @@ Run `node setup.js` bundled with Hackathon Starter, then select
 **Email Service** option. It will automatically replace appropriate strings in
 your code. Currently there are three options: SendGrid, Mandrill, and Mailgun.
 
-How It Works (mini guides)
---------------------------
-
-This section is intended for giving you a detailed explanation about
-how a particular functionality works. Maybe you are just curious about
-how it works, or maybe you are lost and confused while reading the code,
-I hope it provides some guidance to you.
-
-###Custom HTML and CSS Design 101
-
-[HTML5 UP](http://html5up.net/) has many beautiful templates that you can download for free.
-
-When you download the ZIP file, it will come with *index.html*, *images*, *css* and *js* folders. So, how do you
-integrate it with Hackathon Starter? Hackathon Starter uses Bootstrap CSS framework, but these templates do not.
-Trying to use both CSS files at the same time will likely result in undesired effects.
-
-**Note:** Using the custom templates approach, you should understand that you cannot reuse any of the views I have created: layout, home page, api browser, login, signup, account management, contact. Those views were built using Bootstrap grid and styles. You will have to manually update the grid using a different syntax provided in the template. **Having said that, you can mix and match if you want to do so: Use Bootstrap for main app interface, and a custom template for a landing page.**
-
-Let's start from the beginning. For this example I will use [Escape Velocity](http://html5up.net/escape-velocity/) template:
-![Alt](http://html5up.net/uploads/images/escape-velocity.jpg)
-
-**Note:** For the sake of simplicity I will only consider `index.html`, and skip `left-sidebar.html`,
-`no-sidebar.html`, `right-sidebar.html`.
-
-Move all JavaScript files from `html5up-escape-velocity/js` to `public/js`. Then move all CSS files from `html5up-escape-velocity/css` to `public/css`. And finally, move all images from `html5up-escape-velocity/images` to `public/images`. You could move it to the existing **img** folder, but that would require manually changing every `img` reference. Grab the contents of `index.html` and paste it into [HTML To Jade](http://html2jade.aaron-powell.com/).
-
-**Note:** Do not forget to update all the CSS and JS paths accordingly.
-
-Create a new file `escape-velocity.jade` and paste the Jade markup in `views` folder.
-Whenever you see the code `res.render('account/login')` - that means it will search for `views/account/login.jade` file.
-
-Let's see how it looks. Create a new controller **escapeVelocity** inside `controllers/home.js`:
-
-```js
-exports.escapeVelocity = function(req, res) {
-  res.render('escape-velocity', {
-    title: 'Landing Page'
-  });
-};
-```
-
-And then create a route in `app.js`. I placed it right after the index controller:
-```js
-app.get('/escape-velocity', homeController.escapeVelocity);
-```
-
-Restart the server (if you are not using **nodemon**), then you should see the new template at [http://localhost:3000/escape-velocity](http://localhost:3000/escape-velocity).
-
-I will stop right here, but if you would like to use this template as more than just a single page, take a look at how these Jade templates work: `layout.jade` - base template, `index.jade` - home page, `partials/header.jade` - Bootstrap navbar, `partials/footer.jade` - sticky footer. You will have to manually break it apart into smaller pieces. Figure out which part of the template you want to keep the same on all pages - that's your new `layout.jade`.
-Then, each page that changes, be it `index.jade`, `about.jade`, `contact.jade`
-will be embedded in your new `layout.jade` via `block content`. Use existing templates as a reference.
-
-This is a rather lengthy process, and templates you get from elsewhere,
-might have yet another grid system. That's why I chose *Bootstrap* for the Hackathon Starter.
- Many people are already familiar with *Bootstrap*, plus it's easy to get started with it if you have never used *Bootstrap*.
- You can also buy many beautifully designed *Bootstrap* themes at [Themeforest](http://themeforest.net/), and use them as a drop-in replacement for Hackathon Starter. However, if you would like to go with a completely custom HTML/CSS design, this should help you to get started!
-
 <hr>
 
 ### How do flash messages work in this project?
