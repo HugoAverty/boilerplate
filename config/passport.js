@@ -13,6 +13,7 @@ var OAuthStrategy = require('passport-oauth').OAuthStrategy;
 var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 
 var User = require('../models/User');
+var Todo = require('../models/Todo');
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);

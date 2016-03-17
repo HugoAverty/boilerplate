@@ -5,11 +5,20 @@ block content
   p.lead Boilerplate
   hr
   .row
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
+    .col-sm-6(ng-controller="todoCtrl")
+        h2
+            | You've got
+            span.emphasis {{getTotalTodos()}}
+            |  things to do
+        ul
+            li(ng-repeat='todo in todos')
+                input(type='checkbox', ng-model='todo.status')
+                span(class='done-{{todo.status}}') {{todo.text}}
+        form
+            input.add-input(placeholder='I need to...', type='text', ng-model='formTodoText', ng-model-instant='')
+            button.add-btn(ng-click='addTodo()')
+                h2 Add
+        button.clear-btn(ng-click='clearCompleted()') Clear completed
     .col-sm-6
       h2 Heading
       p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.

@@ -20,6 +20,7 @@ var express = require('express'), // Node.js web framework.
     http = require('http'),
     io = require('socket.io'),
     sass = require('node-sass-middleware'),
+    // Todo add Middleware for JS concat and stuff
     multer = require('multer'),
     storage = multer.diskStorage({
         destination: __dirname + '/uploads/',
@@ -86,7 +87,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(compress());
 app.use(sass({
-  src: path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'src'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
 }));
@@ -155,7 +156,7 @@ app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 
-app.get('/dashboard', dashboardController.getDashboard);
+app.get('/dashboard', passportConfig.isAuthenticated, dashboardController.getDashboard);
 
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
@@ -166,7 +167,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  * API examples routes.
  */
-app.get('/api', apiController.getApi);
+app.get('/api', passportConfig.isAuthenticated, apiController.getApi);
 app.get('/api/steam', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getSteam);
 app.get('/api/facebook', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
 app.get('/api/github', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGithub);

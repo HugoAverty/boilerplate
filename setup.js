@@ -32,7 +32,7 @@ var homeTitle = blessed.text({
   align: 'center',
   fg: 'blue',
   bg: 'white',
-  content: 'Hackathon Starter (c) 2014-2016'
+  content: 'Hugo Averty Boilerplate (c) 2016-2017'
 });
 
 var footer = blessed.text({

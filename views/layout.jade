@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app='app')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -8,7 +8,7 @@ html
     title #{title} - Website
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
-    link(rel='stylesheet', href='//cdn.jsdelivr.net/flexboxgrid/6.3.0/flexboxgrid.min.css')
+    //link(rel='stylesheet', href='//cdn.jsdelivr.net/flexboxgrid/6.3.0/flexboxgrid.min.css')
   body
     include partials/header
 
@@ -18,9 +18,11 @@ html
 
     include partials/footer
 
-    script(src='/js/lib/jquery-2.2.0.min.js')
-    script(src='/js/lib/bootstrap.min.js')
-    script(src='/js/main.js')
+    //script(src='/js/lib/jquery-2.2.0.min.js')
+    //script(src='/js/lib/bootstrap.min.js')
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js')
+    script(src='js/app/app.js')
+    script(src='js/app/todo/todo.Ctrl.js')
     script(src='/socket.io/socket.io.js?v=#{cacheBuster}')
         //- For real-time monitoring
         script.
