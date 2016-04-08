@@ -1,5 +1,5 @@
 doctype html
-html(ng-app='app')
+html(ng-app='app', ng-cloak='')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -8,11 +8,13 @@ html(ng-app='app')
     title #{title} - Website
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css')
+
     //link(rel='stylesheet', href='//cdn.jsdelivr.net/flexboxgrid/6.3.0/flexboxgrid.min.css')
   body
-    include partials/header
+    //include partials/header
 
-    .container
+    .global-wrapper
       include partials/flash
       block content
 
@@ -21,9 +23,36 @@ html(ng-app='app')
     //script(src='/js/lib/jquery-2.2.0.min.js')
     //script(src='/js/lib/bootstrap.min.js')
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js')
-    script(src='js/app/app.js')
-    script(src='js/app/todo/todo.Ctrl.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js')
+    script(src='js/lib/ng-openweathermap.js')
+    script(src='js/lib/ng-flow-standalone.js')
     script(src='/socket.io/socket.io.js?v=#{cacheBuster}')
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js")
+
+    script(src='js/app/app.js')
+    script(src='js/app/app.config.js')
+    script(src='js/app/app.factory.js')
+    script(src='js/app/app.filter.js')
+
+    script(src='js/app/todo/todo.Ctrl.js')
+
+    script(src='js/app/calendar/calendar.Directive.js')
+    script(src='js/app/calendar/calendar.Ctrl.js')
+
+    script(src='js/app/file_upload/fileUpload.Ctrl.js')
+
+    script(src='js/app/time/time.Ctrl.js')
+
+    script(src='js/app/weather/weather.Ctrl.js')
+
+    script(src='js/app/search/search.Ctrl.js')
+
+    script(src='js/app/bookmarks/bookmark.Filter.js')
+    script(src='js/app/bookmarks/bookmark.Directive.js')
+    script(src='js/app/bookmarks/bookmark.Ctrl.js')
         //- For real-time monitoring
         script.
             var socket = io.connect();

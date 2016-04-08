@@ -1,0 +1,52 @@
+.bookmarks {
+  a {
+    &.bookmark-link {
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      margin: 10px;
+      border-radius: 12px;
+      position: relative;
+      background: #e6e6e6;
+      &:before, &:after {
+        content: '';
+        position: absolute; left: 0; top: 0;
+        width: 100%; height: 100%;
+        background: inherit;
+        border-radius: 100%; /*circle*/
+        /*time to transform the circle into fish-eye shape. iOS7 style now.*/
+        transform: scaleX(2) scaleY(1.05);
+        /*clipping the left and right sides - 17px from the left and right*/
+        clip: rect(0, 33px, 50px, 17px);
+        /*pushing it behind the icon*/
+        z-index: -1;
+      }
+      &:after {
+        transform: scaleY(2) scaleX(1.05) rotate(90deg);
+      }
+      img {
+        display: block;
+        font-size: 24px;
+        line-height: 50px;
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .bookmark-legend {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        span {
+          display: block;
+        }
+      }
+      &:hover {
+        .bookmark-legend {
+          opacity: 1;
+          visibility: visible;
+          color: $colorDark;
+        }
+      }
+    }
+  }
+}

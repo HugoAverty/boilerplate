@@ -1,36 +1,103 @@
 extends layout
 
 block content
-  h1 Page title
-  p.lead Boilerplate
-  hr
   .row
-    .col-sm-6(ng-controller="todoCtrl")
-        h2
-            | You've got
-            span.emphasis {{getTotalTodos()}}
-            |  things to do
-        ul
-            li(ng-repeat='todo in todos')
-                input(type='checkbox', ng-model='todo.status')
-                span(class='done-{{todo.status}}') {{todo.text}}
-        form
-            input.add-input(placeholder='I need to...', type='text', ng-model='formTodoText', ng-model-instant='')
-            button.add-btn(ng-click='addTodo()')
-                h2 Add
-        button.clear-btn(ng-click='clearCompleted()') Clear completed
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
+    .col-sm-3
+        .widget.widget-clock.widget-transparent
+            .clock(ng-controller='timeCtrl')
+                h2 {{ clock | date:'HH:mm:ss'}}
+                h3 {{ day }} {{ month }}
+        .widget.widget-calendar.widget-transparent
+            .calendar(ng-controller="calendarCtrl")
+                calendar(selected="day")
+                .clearfix
+        .widget.widget-weather.widget-transparent
+            .weather(ng-controller='weatherCtrl')
+                owm-icon(id="{{ weather.weather[0].id }}", style="font-size: 48px")
+                | {{ weather.main.temp }} °C
+        .widget.widget-todo
+            md-content.favorites.todo(ng-controller='todoCtrl')
+                md-tabs(md-dynamic-height='', md-border-bottom='')
+                    md-tab(label='All')
+                        md-content.md-padding
+                            span.emphasis {{getTotalTodos()}}
+                            |  things to do
+                            ul
+                                li(ng-repeat='todo in todos')
+                                    md-checkbox(ng-model='todo.status')
+                                    span(class='done-{{todo.status}}') {{todo.category}} - {{todo.text}}
+                            form
+                                md-input-container
+                                    label Title
+                                    input.add-input(placeholder='I need to...', type='text', ng-model='titleTodo', ng-model-instant='')
+                                md-input-container
+                                    label Category
+                                    input.add-input(type='text', ng-model='categoryTodo', ng-model-instant='')
+                                md-button.md-raised(ng-click='addTodo()')
+                                    | Add
+
+                            button.clear-btn(ng-click='clearCompleted()') Clear completed
+                    md-tab(label='Work')
+                        md-content.md-padding
+    .col-sm-5
+        .widget.widget-search.widget-transparent
+            .search(ng-controller="searchCtrl")
+                form.search-submit(ng-submit="submit()")
+                    input.search-field(placeholder="Rechercher")
+        .widget.widget-bookmarks
+            md-content.bookmarks(ng-controller="bookmarksCtrl")
+                md-tabs(md-dynamic-height='', md-border-bottom='')
+                    md-tab(label='Most used')
+                        md-content.md-padding
+                            a.bookmark-link(href="http://github.com", target="_blank")
+                                img(ng-src="{{'http://github.com' | favicon}}").bookmark-icon
+                                span.bookmark-legend
+                                    span.bookmark-legend-title GitHub
+                                    span.bookmark-legend-url http://github.com
+                            a.bookmark-link(href="http://google.com", target="_blank")
+                                img(ng-src="{{'http://google.com' | favicon}}").bookmark-icon
+                                span.bookmark-legend
+                                    span.bookmark-legend-title Google
+                                    span.bookmark-legend-url http://Google.com
+                            a.bookmark-link(href="http://facebook.com", target="_blank")
+                                img(ng-src="{{'http://facebook.com' | favicon}}").bookmark-icon
+                                span.bookmark-legend
+                                    span.bookmark-legend-title Facebook
+                                    span.bookmark-legend-url http://facebook.com
+                            a.bookmark-link(href="http://codepen.com", target="_blank")
+                                img(ng-src="{{'http://codepen.com' | favicon}}").bookmark-icon
+                                span.bookmark-legend
+                                    span.bookmark-legend-title Codepen
+                                    span.bookmark-legend-url http://Codepen.com
+                            a.bookmark-link(href="http://twitter.com", target="_blank")
+                                img(ng-src="{{'http://twitter.com' | favicon}}").bookmark-icon
+                                span.bookmark-legend
+                                    span.bookmark-legend-title Twitter
+                                    span.bookmark-legend-url http://Twitter.com
+                    md-tab(label='Work')
+                        md-content.md-padding
+                                a.bookmark-link(href="http://linkedin.com", target="_blank")
+                                    img(ng-src="{{'http://linkedin.com' | favicon}}").bookmark-icon
+                                a.bookmark-link(href="http://korben.info", target="_blank")
+                                    img(ng-src="{{'http://korben.info' | favicon}}").bookmark-icon
+                                a.bookmark-link(href="http://youtube.com", target="_blank")
+                                    img(ng-src="{{'http://youtube.com' | favicon}}").bookmark-icon
+                                a.bookmark-link(href="http://gmail.com", target="_blank")
+                                    img(ng-src="{{'http://gmail.com' | favicon}}").bookmark-icon
+                    md-tab(label='+',ng-click='alert("TO")')
+
+
+    .col-sm-3(ng-controller="fileUploadCtrl")
+        div(flow-init="{target: '/upload'}", flow-files-submitted='$flow.upload()', flow-file-success='$file.msg = $message', flow-drag-enter="style={border:'4px solid green'}", flow-drag-leave="style={}", ng-style="style")
+            .alert(flow-drop='', style="height: 75px; background: #CCC;", flow-btn='')
+                | Drag And Drop your file here
+            table
+                tr(ng-repeat='file in directory_files')
+                    td(ng-if="file.isDirectory") <a class="directory" href="{{ file.path }}" target="_blank">{{ file.name }}</a>
+                    td(ng-if="!file.isDirectory") <a class="file-{{ file.extension }}" href="{{ file.path }}" target="_blank">{{ file.name }}</a>
+                    td(ng-if="!file.isDirectory") <em>{{ file.size | bytes }}</em>
+                tr(ng-repeat='file in $flow.files')
+                    td {{$index+1}}
+                    td {{file.name}}
+                    td {{file.size | bytes }}
+      .col-sm-1(style="background: #FFF;")

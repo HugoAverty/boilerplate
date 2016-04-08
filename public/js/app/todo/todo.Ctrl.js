@@ -1,16 +1,16 @@
 'use strict';
-app.controller('todoCtrl', function($scope) {
+app.controller('todoCtrl', function($scope, $http) {
     $scope.todos = [
         {
             text:'Learn AngularJS',
-            categorie: false,
+            category: 'CE',
             priority: false,
             assigned: false,
             status: false
         },
         {
             text: 'Build an app',
-            categorie: false,
+            category: 'DNS',
             priority: false,
             assigned: false,
             status: false
@@ -23,16 +23,27 @@ app.controller('todoCtrl', function($scope) {
 
 
     $scope.addTodo = function () {
+        console.log($scope.csrf);
         $scope.todos.push(
             {
-                text: $scope.formTodoText,
-                categorie: false,
+                text: $scope.titleTodo,
+                category: $scope.categoryTodo,
                 priority: false,
                 assigned: false,
                 status: false
             }
         );
-        $scope.formTodoText = '';
+        $http({
+            method: 'POST',
+            url: '/todo'
+        }).then(function successCallback(response) {
+            console.log(response);
+        }, function errorCallback(error) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+        $scope.titleTodo = '';
+        $scope.categoryTodo = '';
     };
 
     $scope.clearCompleted = function () {

@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 
 var todoSchema = new mongoose.Schema({
     id: { type: String, lowercase: true, unique: true },
-    creationDate: Date,
-    deletedDate: Date,
+    creationDate: { type: Date },
+    deletedDate: { type: Date },
 
     todo: {
         name: { type: String, default: '' },

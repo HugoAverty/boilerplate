@@ -1,0 +1,8 @@
+.widget {
+  background: $colorWhite;
+  border-radius: 15px;
+  padding: 15px;
+  &.widget-transparent {
+    background: transparent;
+  }
+}
